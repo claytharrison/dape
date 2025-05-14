@@ -172,7 +172,7 @@
                                     (call-process-shell-command
                                      (format "%s -c \"import debugpy.adapter\"" python)))
                              (user-error "%s module debugpy is not installed" python))))
-                command "python"
+                command (lambda () (if (bound-and-true-p python-interpreter) python-interpreter "python"))
                 command-args ("-m" "debugpy.adapter" "--host" "0.0.0.0" "--port" :autoport)
                 port :autoport
                 :request "launch"
